@@ -2,13 +2,9 @@
 using namespace std;
 
 class Box {
-    //Implement the class Box  
-    //l,b,h are integers representing the dimensions of the box
-
-    // The class should have the following functions : 
-
-    // Constructors: 
     public:
+    // The class should have the following functions : 
+    // Constructors: 
     Box();
     Box(int length, int breadth, int height);
     Box(const Box &obj);
@@ -21,20 +17,20 @@ class Box {
     //Overload operator < as specified
     //bool operator<(Box& b)
     bool operator<(const Box& B){
-    if(this->box_length < B.box_length){
-        return true;
+        if(this->box_length < B.box_length){
+            return true;
+        }
+        else if((this->box_breadth < B.box_length)&&(this->box_length == B.box_length)){
+            return true;
+        }
+        else if((this->box_height == B.box_height)&&(this->box_breadth == B.box_breadth)&&(this->box_length == B.box_length)){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-    else if((this->box_breadth < B.box_length)&&(this->box_length == B.box_length)){
-        return true;
-    }
-    else if((this->box_height == B.box_height)&&(this->box_breadth == B.box_breadth)&&(this->box_length == B.box_length)){
-        return true;
-    }
-    else{
-        return false;
-    }
-    }
- 
+    //l,b,h are integers representing the dimensions of the box
     private:
     int box_length;
     int box_breadth;
@@ -72,11 +68,11 @@ long long Box::CalculateVolume(){
     }
 //Overload operator << as specified
 ostream& operator<< (ostream& out, Box& B){
-    out << B.getLength() << " " << B.getBreadth() << " " << B.getHeight() << endl;
+    out << B.getLength() << " " << B.getBreadth() << " " << B.getHeight();
     return out;
 }
  
-void check2()
+void check()
 {
 	int n;
 	cin>>n;
@@ -126,5 +122,5 @@ void check2()
 
 int main()
 {
-	check2();
+	check();
 }
