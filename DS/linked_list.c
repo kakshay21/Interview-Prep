@@ -4,14 +4,15 @@ struct node {
   int data;
   struct node* next;
 }l;
+struct node* head = &l;
 struct node* insert(struct node* l, int key, int pos){
   if(l == NULL) return NULL;
   if(pos == 0){
     struct node* newNode = (struct node*)malloc(sizeof(struct node));
     newNode->data = key;
-    newNode->next = NULL;
-    l->next  = newNode;
-    return newNode;
+    newNode->next = l;
+    head = newNode;
+    return head;
   }
   else if(pos == -1){
     while(l->next != NULL){
@@ -26,7 +27,7 @@ struct node* insert(struct node* l, int key, int pos){
   else{
     struct node* prev = l;
     int count = 0;
-    while(l!= NULL && count != pos){
+    while(l!= NULL && count <= pos-1){
       prev = l;
       l = l->next;
       count++;
@@ -83,7 +84,7 @@ struct node* search(struct node* head, int key){
     return NULL;
 }
 
-void reverseList(struct node* head){
+struct node* reverseList(struct node* head){
   if(head == NULL) return NULL;
   struct node* first = head;
   struct node* rest = first->next;
@@ -91,18 +92,19 @@ void reverseList(struct node* head){
   first->next->next = first;
   first->next = NULL;
   head = rest;
+  return head;
 }
 
 
-struct Node* SortedMerge(struct Node* a, struct Node* b){
-  struct Node* result = NULL;
+struct node* SortedMerge(struct node* a, struct node* b){
+  struct node* result = NULL;
   if (a == NULL){
-    return(b);
+    return b;
   }
   else if (b==NULL){
-    return(a);
+    return a;
   }
-  if (a->data <= b->data){
+  if ((a->data) <= (b->data)){
     result = a;
     result->next = SortedMerge(a->next, b);
   }
@@ -110,11 +112,10 @@ struct Node* SortedMerge(struct Node* a, struct Node* b){
     result = b;
     result->next = SortedMerge(a, b->next);
   }
-  return(result);
+  return result;
 }
 
 int main(){
-  struct node* head = &l;
   struct node* list = head;
   int opn, insertOpn, key, pos;
   while(1){
@@ -135,7 +136,7 @@ int main(){
         if(insertOpn == 1){
           printf("Enter key\n");
           scanf("%d",&key);
-          insert(list,key,0);
+          head = insert(list,key,0);
         }
         else if(insertOpn == 2){
           printf("Enter key\n");

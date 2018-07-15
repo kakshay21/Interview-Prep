@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "__bit_reference": "cpp",
+        "bitset": "cpp",
+        "chrono": "cpp",
+        "set": "cpp",
+        "unordered_set": "cpp",
+        "iostream": "cpp"
+    }
+}
